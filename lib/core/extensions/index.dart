@@ -1,0 +1,1 @@
+export 'package:flix_chat/core/extensions/size_extensions.dart';
