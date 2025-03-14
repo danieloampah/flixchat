@@ -1,6 +1,8 @@
 import 'package:figma_squircle/figma_squircle.dart';
+import 'package:flix_chat/core/constants/svg_assets.dart';
 import 'package:flix_chat/core/extensions/size_extensions.dart';
 import 'package:flix_chat/core/theme/app_colors.dart';
+import 'package:flix_chat/core/widgets/svg.dart';
 import 'package:flutter/material.dart';
 
 class AuthButton extends StatelessWidget {
@@ -9,18 +11,23 @@ class AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-        splashColor: AppColors.red,
+        splashColor: AppColors.red.withValues(alpha: 0.1),
         color: AppColors.darkGrey,
         minWidth: context.width(1),
-        height: context.height(0.068),
+        height: context.height(0.070),
         shape: SmoothRectangleBorder(
             borderRadius: SmoothBorderRadius(
           cornerRadius: context.height(0.050),
         )),
         onPressed: () {},
-        child: const Text(
-          'Sign In with Google',
-          style: TextStyle(color: Colors.white),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Sign In with Google',
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
         ));
     // Container(
     //   alignment: Alignment.center,
