@@ -1,35 +1,42 @@
 import 'package:flix_chat/features/authentication/repository/authentication_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AuthNotifier extends StateNotifier<AuthStates> {
+class AuthNotifier extends StateNotifier<AuthState> {
   final AuthenticationRepository authenticationRepository;
   AuthNotifier({required this.authenticationRepository})
-      : super(AuthStates.initial);
+      : super(AuthState(message: '',state:AuthStatesEnum.initial ));
 
   void googleSignIn() async {
-    state = AuthStates.loading;
+    state = AuthState(message: '',state:AuthStatesEnum.loading );
     final response = await authenticationRepository.googleSign();
     response.fold((error) {
-      state = AuthStates.error;
+  state =   AuthState(message: error,state:AuthStatesEnum.error );
     }, (success) {
-      state = AuthStates.success;
+     state = AuthState(message: 'Sign in successfully',state:AuthStatesEnum.success );
     });
   }
 
   void appleSignIn() async {
-    state = AuthStates.loading;
+    state = AuthState(message: '',state:AuthStatesEnum.loading );
     final response = await authenticationRepository.appleSignIn();
     response.fold((error) {
-      state = AuthStates.error;
+      state =   AuthState(message: error,state:AuthStatesEnum.error );
     }, (success) {
-      state = AuthStates.success;
+        state =    AuthState(message: 'Sign in successfully',state:AuthStatesEnum.success );
     });
   }
 }
 
-enum AuthStates {
+enum AuthStatesEnum {
   initial,
   loading,
   error,
   success,
+}
+
+class AuthState {
+  final AuthStatesEnum state;
+  final String message;
+
+  AuthState({required this.state, required this.message});
 }

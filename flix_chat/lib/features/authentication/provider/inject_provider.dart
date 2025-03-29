@@ -13,6 +13,6 @@ final authRepository = AuthenticationRepository(
   networkChecker: NetworkChecker(dataConnectionChecker: dataConnection),
 );
 
-final authenticationNotifier = StateNotifierProvider.autoDispose<AuthNotifier, AuthStates>(
+final authenticationNotifier = StateNotifierProvider.autoDispose<AuthNotifier, AuthState>(
   (ref) => AuthNotifier(authenticationRepository: authRepository),
 );

@@ -1,6 +1,7 @@
 import 'package:flix_chat/core/extensions/index.dart';
 import 'package:flix_chat/core/widgets/buttons/auth_button.dart';
 import 'package:flix_chat/core/widgets/loading_indicator.dart';
+import 'package:flix_chat/core/widgets/snack_bar.dart';
 import 'package:flix_chat/features/authentication/presentation/widgets/title.dart';
 import 'package:flix_chat/features/authentication/provider/auth_provider.dart';
 import 'package:flix_chat/features/authentication/provider/inject_provider.dart';
@@ -18,10 +19,11 @@ class AuthPage extends ConsumerWidget {
       authenticationNotifier,
       (oldState, newState) {
         if (oldState != newState) {
-          if (newState == AuthStates.success) {}
-          if (newState == AuthStates.error) {
-            // Navigator.of(context).push(
-            //     MaterialPageRoute(builder: (_) => const ChooseAvatarPage()));
+          if (newState.state == AuthStatesEnum.success) {
+
+          }
+          if (newState.state == AuthStatesEnum.error) {
+            showSnackBar(message: newState.message, context: context);
           }
         }
       },
@@ -29,7 +31,7 @@ class AuthPage extends ConsumerWidget {
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: context.pagePadding.copyWith(bottom: context.height(0.03)),
-        child: authState == AuthStates.loading
+        child: authState.state == AuthStatesEnum.loading
             ? const LoadingIndicator()
             : Column(
                 mainAxisSize: MainAxisSize.min,
